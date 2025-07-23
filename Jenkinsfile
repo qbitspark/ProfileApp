@@ -53,7 +53,7 @@ pipeline {
 
         stage('Deploy to PROD') {
             when {
-                branch 'main'
+                branch 'master'
             }
             steps {
                 echo "Deploying to PRODUCTION environment..."
