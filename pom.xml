@@ -8,9 +8,9 @@
         <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.example</groupId>
-    <artifactId>ProfileApp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.example</groupId>
+    <artifactId>profile-app</artifactId>
+    <version>1.0.0</version>
     <name>ProfileApp</name>
     <description>ProfileApp</description>
     <url/>
