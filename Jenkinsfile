@@ -5,7 +5,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Code checked out from Git"
-                // git branch: 'main', url: 'your-repo-url'
             }
         }
 
@@ -37,7 +36,7 @@ pipeline {
             steps {
                 echo "Deploying to DEV environment..."
                 sh 'java -jar -Dspring.profiles.active=dev target/profile-app-1.0.0.jar &'
-                echo "DEV deployment completed - App running on port 8081"
+                echo "DEV deployment completed - App running on port 8091"
             }
         }
 
@@ -48,7 +47,7 @@ pipeline {
             steps {
                 echo "Deploying to TEST environment..."
                 sh 'java -jar -Dspring.profiles.active=test target/profile-app-1.0.0.jar &'
-                echo "TEST deployment completed - App running on port 8082"
+                echo "TEST deployment completed - App running on port 8092"
             }
         }
 
@@ -59,7 +58,7 @@ pipeline {
             steps {
                 echo "Deploying to PRODUCTION environment..."
                 sh 'java -jar -Dspring.profiles.active=prod target/profile-app-1.0.0.jar &'
-                echo "PROD deployment completed - App running on port 8080"
+                echo "PROD deployment completed - App running on port 8090"
             }
         }
     }
