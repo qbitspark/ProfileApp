@@ -29,36 +29,27 @@ pipeline {
             }
         }
 
-        stage('Deploy to DEV') {
-            when {
-                branch 'develop'
-            }
+        stage('Deploy') {
             steps {
-                echo "Deploying to DEV environment..."
-                sh 'java -jar -Dspring.profiles.active=dev target/profile-app-1.0.0.jar &'
-                echo "DEV deployment completed - App running on port 8091"
-            }
-        }
-
-        stage('Deploy to TEST') {
-            when {
-                branch 'release/*'
-            }
-            steps {
-                echo "Deploying to TEST environment..."
-                sh 'java -jar -Dspring.profiles.active=test target/profile-app-1.0.0.jar &'
-                echo "TEST deployment completed - App running on port 8092"
-            }
-        }
-
-        stage('Deploy to PROD') {
-            when {
-                branch 'main'
-            }
-            steps {
-                echo "Deploying to PRODUCTION environment..."
-                sh 'java -jar -Dspring.profiles.active=prod target/profile-app-1.0.0.jar &'
-                echo "PROD deployment completed - App running on port 8090"
+                script {
+                    // Determine environment based on branch
+                    def branch = env.GIT_BRANCH
+                    if (branch.contains('develop')) {
+                        echo "Deploying to DEV environment..."
+                        sh 'java -jar -Dspring.profiles.active=dev target/profile-app-1.0.0.jar &'
+                        echo "DEV deployment completed - App running on port 8091"
+                    } else if (branch.contains('release/')) {
+                        echo "Deploying to TEST environment..."
+                        sh 'java -jar -Dspring.profiles.active=test target/profile-app-1.0.0.jar &'
+                        echo "TEST deployment completed - App running on port 8092"
+                    } else if (branch.contains('main')) {
+                        echo "Deploying to PRODUCTION environment..."
+                        sh 'java -jar -Dspring.profiles.active=prod target/profile-app-1.0.0.jar &'
+                        echo "PROD deployment completed - App running on port 8090"
+                    } else {
+                        echo "No deployment configured for branch: ${branch}"
+                    }
+                }
             }
         }
     }
