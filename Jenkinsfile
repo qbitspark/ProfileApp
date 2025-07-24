@@ -42,7 +42,7 @@ pipeline {
                         echo "Deploying to TEST environment..."
                         sh 'java -jar -Dspring.profiles.active=test target/profile-app-1.0.0.jar &'
                         echo "TEST deployment completed - App running on port 8092"
-                    } else if (branch.contains('main')) {
+                    } else if (branch.contains('master')) {
                         echo "Deploying to PRODUCTION environment..."
                         sh 'java -jar -Dspring.profiles.active=prod target/profile-app-1.0.0.jar &'
                         echo "PROD deployment completed - App running on port 8090"
